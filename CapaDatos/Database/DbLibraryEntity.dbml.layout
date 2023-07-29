@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.625" name="DbLibraryEntity">
+  <DataContextMoniker Name="/DbLibraryEntityDataContext" />
+  <nestedChildShapes>
+    <classShape Id="e3d2218a-869d-4300-97a4-11d711c3cd53" absoluteBounds="3.5, 3.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TD_Reserva_Espacio_Trabajo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb0c3c05-2297-4029-a35d-38810f005616" absoluteBounds="3.515, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a4b3d889-3400-4f17-867b-b6b75549c7e5" absoluteBounds="0.75, 10, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TM_Salones_Reunione" />
+      <nestedChildShapes>
+        <elementListCompartment Id="04f43b5c-9c21-4435-9a83-701c2a897e2e" absoluteBounds="0.765, 10.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="497fee79-716b-4452-82f0-d66620959303" absoluteBounds="3.5, 0.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TD_Reserva_Libro" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ede494f4-b3bf-466e-8e4d-93d268ac9d8c" absoluteBounds="3.515, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="42eff946-adff-4100-9941-feae5fcc6822" absoluteBounds="3.5, 6.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TD_Reserva_salones_reunione" />
+      <nestedChildShapes>
+        <elementListCompartment Id="df8c55dd-e555-49c8-911a-7b53432ef4f5" absoluteBounds="3.515, 7.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="68dfd501-499d-4d74-8863-e1c2fac5eb47" absoluteBounds="0.75, 7, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TM_Espacio_Trabajo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5d1e3cce-5076-46fa-984c-b2656000c64d" absoluteBounds="0.765, 7.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="28fe25ec-f37e-4fb6-8406-9cad89cc26e0" absoluteBounds="0.75, 3.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TM_Estudiante" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02676a29-5c6d-45f0-af2c-15d3fc7e30c2" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e5df6efa-7fb1-4c22-92a9-a8b7a5403240" absoluteBounds="0.75, 1.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DbLibraryEntityDataContext/TM_Libro" />
+      <nestedChildShapes>
+        <elementListCompartment Id="939ba6c7-7b34-4728-8eee-6aec50517255" absoluteBounds="0.765, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 10.6931469726562); (4.5 : 10.6931469726562); (4.5 : 8.52089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbLibraryEntityDataContext/TM_Salones_Reunione/TM_Salones_Reunione_TD_Reserva_salones_reunione" />
+      <nodes>
+        <classShapeMoniker Id="a4b3d889-3400-4f17-867b-b6b75549c7e5" />
+        <classShapeMoniker Id="42eff946-adff-4100-9941-feae5fcc6822" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.00091745577925); (3.125 : 6.62591745577925); (3.125 : 4.77920040494792); (3.5 : 4.77920040494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbLibraryEntityDataContext/TM_Espacio_Trabajo/TM_Espacio_Trabajo_TD_Reserva_Espacio_Trabajo" />
+      <nodes>
+        <classShapeMoniker Id="68dfd501-499d-4d74-8863-e1c2fac5eb47" />
+        <classShapeMoniker Id="e3d2218a-869d-4300-97a4-11d711c3cd53" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.20210020247396); (3.5 : 4.20210020247396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbLibraryEntityDataContext/TM_Estudiante/TM_Estudiante_TD_Reserva_Espacio_Trabajo" />
+      <nodes>
+        <classShapeMoniker Id="28fe25ec-f37e-4fb6-8406-9cad89cc26e0" />
+        <classShapeMoniker Id="e3d2218a-869d-4300-97a4-11d711c3cd53" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.75); (3.125 : 3.375); (3.125 : 1.41408430371094); (3.5 : 1.41408430371094)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbLibraryEntityDataContext/TM_Estudiante/TM_Estudiante_TD_Reserva_Libro" />
+      <nodes>
+        <classShapeMoniker Id="28fe25ec-f37e-4fb6-8406-9cad89cc26e0" />
+        <classShapeMoniker Id="497fee79-716b-4452-82f0-d66620959303" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.45959553570713); (3.06607443490112 : 5.77566997060825 : JumpStart); (3.18392556509888 : 5.89352110080601 : JumpEnd); (3.3125 : 6.02209553570713); (3.3125 : 7.63544840494792); (3.5 : 7.63544840494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbLibraryEntityDataContext/TM_Estudiante/TM_Estudiante_TD_Reserva_salones_reunione" />
+      <nodes>
+        <classShapeMoniker Id="28fe25ec-f37e-4fb6-8406-9cad89cc26e0" />
+        <classShapeMoniker Id="42eff946-adff-4100-9941-feae5fcc6822" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.14067260742187); (3.04166666666667 : 2.14067260742187 : JumpStart); (3.20833333333333 : 2.14067260742187 : JumpEnd); (3.5 : 2.14067260742187)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbLibraryEntityDataContext/TM_Libro/TM_Libro_TD_Reserva_Libro" />
+      <nodes>
+        <classShapeMoniker Id="e5df6efa-7fb1-4c22-92a9-a8b7a5403240" />
+        <classShapeMoniker Id="497fee79-716b-4452-82f0-d66620959303" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

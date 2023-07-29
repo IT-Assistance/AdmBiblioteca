@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BIBLIOTECA" Class="DbLibraryEntityDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-64OM5QA\SQLEXPRESS;Initial Catalog=BIBLIOTECA;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="BIBLIOTECAConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TD_Reserva_Espacio_Trabajo" Member="TD_Reserva_Espacio_Trabajos">
+    <Type Name="TD_Reserva_Espacio_Trabajo">
+      <Column Name="ID_Reserva_Espacio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Espacio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Inicio_Reserva" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Final_Reserva" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TM_Espacio_Trabajo_TD_Reserva_Espacio_Trabajo" Member="TM_Espacio_Trabajo" ThisKey="ID_Espacio" OtherKey="ID_Espacio" Type="TM_Espacio_Trabajo" IsForeignKey="true" />
+      <Association Name="TM_Estudiante_TD_Reserva_Espacio_Trabajo" Member="TM_Estudiante" ThisKey="Matricula" OtherKey="Matricula" Type="TM_Estudiante" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Salones_Reuniones" Member="TM_Salones_Reuniones">
+    <Type Name="TM_Salones_Reunione">
+      <Column Name="ID_Salon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre_Salon" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Capacidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TM_Salones_Reunione_TD_Reserva_salones_reunione" Member="TD_Reserva_salones_reuniones" ThisKey="ID_Salon" OtherKey="ID_Salon" Type="TD_Reserva_salones_reunione" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TD_Reserva_Libro" Member="TD_Reserva_Libros">
+    <Type Name="TD_Reserva_Libro">
+      <Column Name="ID_Reserva_Libro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Libro" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Inicio_Reserva" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Final_Reserva" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TM_Estudiante_TD_Reserva_Libro" Member="TM_Estudiante" ThisKey="Matricula" OtherKey="Matricula" Type="TM_Estudiante" IsForeignKey="true" />
+      <Association Name="TM_Libro_TD_Reserva_Libro" Member="TM_Libro" ThisKey="ID_Libro" OtherKey="ID_Libro" Type="TM_Libro" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TD_Reserva_salones_reuniones" Member="TD_Reserva_salones_reuniones">
+    <Type Name="TD_Reserva_salones_reunione">
+      <Column Name="ID_Reserva_Salon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Salon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Inicio_Reserva" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Final_Reserva" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TM_Salones_Reunione_TD_Reserva_salones_reunione" Member="TM_Salones_Reunione" ThisKey="ID_Salon" OtherKey="ID_Salon" Type="TM_Salones_Reunione" IsForeignKey="true" />
+      <Association Name="TM_Estudiante_TD_Reserva_salones_reunione" Member="TM_Estudiante" ThisKey="Matricula" OtherKey="Matricula" Type="TM_Estudiante" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Espacio_Trabajo" Member="TM_Espacio_Trabajos">
+    <Type Name="TM_Espacio_Trabajo">
+      <Column Name="ID_Espacio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre_Espacio" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="TM_Espacio_Trabajo_TD_Reserva_Espacio_Trabajo" Member="TD_Reserva_Espacio_Trabajos" ThisKey="ID_Espacio" OtherKey="ID_Espacio" Type="TD_Reserva_Espacio_Trabajo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Estudiante" Member="TM_Estudiantes">
+    <Type Name="TM_Estudiante">
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Carrera" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="TM_Estudiante_TD_Reserva_Espacio_Trabajo" Member="TD_Reserva_Espacio_Trabajos" ThisKey="Matricula" OtherKey="Matricula" Type="TD_Reserva_Espacio_Trabajo" />
+      <Association Name="TM_Estudiante_TD_Reserva_Libro" Member="TD_Reserva_Libros" ThisKey="Matricula" OtherKey="Matricula" Type="TD_Reserva_Libro" />
+      <Association Name="TM_Estudiante_TD_Reserva_salones_reunione" Member="TD_Reserva_salones_reuniones" ThisKey="Matricula" OtherKey="Matricula" Type="TD_Reserva_salones_reunione" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Libro" Member="TM_Libros">
+    <Type Name="TM_Libro">
+      <Column Name="ID_Libro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre_Libro" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Nombre_Autor" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Numero_Paginas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Genero" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="TM_Libro_TD_Reserva_Libro" Member="TD_Reserva_Libros" ThisKey="ID_Libro" OtherKey="ID_Libro" Type="TD_Reserva_Libro" />
+    </Type>
+  </Table>
+</Database>
