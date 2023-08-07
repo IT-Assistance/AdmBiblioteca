@@ -9,6 +9,6 @@ namespace CapaNegocios.Acciones
 {
     public class AccionesBase
     {
-        public DbLibraryEntityDataContext dbLibContext = new DbLibraryEntityDataContext();
+        protected DbLibraryEntityDataContext dbLibContext = new DbLibraryEntityDataContext();
     }
 }

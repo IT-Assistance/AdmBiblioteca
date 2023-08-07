@@ -15,6 +15,12 @@ namespace CapaNegocios.Acciones
             return dbLibContext.TM_Libros.ToList();
         }
 
+        public TM_Libro getLibro(int id)
+        {
+            return dbLibContext.TM_Libros.Where(i => i.ID_Libro == id).FirstOrDefault();
+        }
+
+
         public List<TM_Salones_Reunione> listSalones()
         {
             return dbLibContext.TM_Salones_Reuniones.ToList();
@@ -26,5 +32,30 @@ namespace CapaNegocios.Acciones
         }
 
         #endregion
+
+
+        public void insertLibro(TM_Libro libro)
+        {
+            dbLibContext.TM_Libros.InsertOnSubmit(libro);
+            dbLibContext.SubmitChanges();
+        }
+
+        public void actualizarLibro(TM_Libro libro)
+        {
+            var item = getLibro(libro.ID_Libro);
+            item.Nombre_Autor = libro.Nombre_Autor;
+            item.Nombre_Libro = libro.Nombre_Libro;
+            item.Numero_Paginas = libro.Numero_Paginas;
+            item.Genero = libro.Genero;
+
+            dbLibContext.SubmitChanges();
+        }
+
+        public void eliminarLibro(int id)
+        {
+            var item = getLibro(id);
+            dbLibContext.TM_Libros.DeleteOnSubmit(item);
+            dbLibContext.SubmitChanges();
+        }
     }
 }

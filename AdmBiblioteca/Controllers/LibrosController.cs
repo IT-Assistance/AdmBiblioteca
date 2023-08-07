@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaDatos.Database;
+using CapaNegocios.Acciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,13 @@ namespace AdmBiblioteca.Controllers
 {
     public class LibrosController : Controller
     {
+
+        AccionesConsulta servicio = new AccionesConsulta();
         // GET: Libros
         public ActionResult Index()
         {
+            var list = servicio.listLibros();
+            ViewBag.List = list;
             return View();
         }
 
@@ -33,6 +39,25 @@ namespace AdmBiblioteca.Controllers
             try
             {
                 // TODO: Add insert logic here
+                TM_Libro libro = new TM_Libro()
+                {
+                    Nombre_Libro = collection.Get("nombre"),
+                    Nombre_Autor = collection.Get("autor"),
+                    Genero = collection.Get("genero"),
+                    Numero_Paginas = int.Parse(collection.Get("paginas")),
+                };
+
+                var id = collection.Get("id");
+                if (id != "")
+                {
+                    libro.ID_Libro = int.Parse(id);
+                    servicio.actualizarLibro(libro);
+                }
+                else
+                {
+                    servicio.insertLibro(libro);
+
+                }
 
                 return RedirectToAction("Index");
             }
@@ -77,12 +102,13 @@ namespace AdmBiblioteca.Controllers
             try
             {
                 // TODO: Add delete logic here
+                servicio.eliminarLibro(id);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
     }
