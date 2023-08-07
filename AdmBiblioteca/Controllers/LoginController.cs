@@ -13,5 +13,11 @@ namespace AdmBiblioteca.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public ActionResult IniciarSesion (FormCollection formCollection)
+        {
+            return RedirectToAction("Index","Libros");
+        }
     }
 }
