@@ -1,0 +1,106 @@
+﻿@model CapaModelo.Modelos.mReservaLibros
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reserva de Libros</h2>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post" action="/reservaLibros/create" id="formulario">
+            <input type="number" hidden id="id" name="id">
+
+            <div class="form-group">
+                <label for="nombre">Estudiante</label>
+                @Html.DropDownList("estudiante", new SelectList(Model.Estudiantes, "Matricula", "Nombre"), new { @class = "form-control", @required = true })
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">Libro</label>
+                @Html.DropDownList("libro", new SelectList(Model.Libros, "ID_Libro", "Nombre_Libro"), new { @class = "form-control", @required = true })
+            </div>
+
+            <div class="form-group">
+                <label for="autor">Fecha Inicio</label>
+                <input required type="date" class="form-control" id="autor" name="fechaInicio">
+            </div>
+
+            <div class="form-group">
+                <label for="autor">Fecha Fin</label>
+                <input required type="date" class="form-control" id="autor" name="fechaFin">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre Libro</th>
+                    <th>Estudiante</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ReservasLibros)
+                {
+                    <tr>
+                        <td>@item.ID_Reserva_Libro</td>
+                        <td>@item.TM_Libro.Nombre_Libro</td>
+                        <td>@item.TM_Estudiante.Nombre</td>
+                        <td>@item.Inicio_Reserva</td>
+                        <td>@item.Final_Reserva</td>
+                        @if (@item.FlagActivo)
+                        {
+                            <td style="color: forestgreen">Activo</td>
+                        }
+                        else
+                        {
+                            <td style="color: darkred">Inactivo</td>
+                        }
+                        <td>
+                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Reserva_Libro)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<script>
+    function editar(id, nombre, autor, genero, paginas) {
+        $("#id").val(id);
+        $("#nombre").val(nombre);
+        $("#autor").val(autor);
+        $("#genero").val(genero);
+        $("#paginas").val(paginas);
+    }
+
+    function eliminar(id) {
+        const opcion = confirm("Desea Eliminar?");
+
+        if (!opcion)
+            return;
+
+        $.ajax({
+            type: "POST",
+            url: "/Libros/Delete/" + id,
+            success: () => location.reload(),
+        });
+    }
+</script>
+

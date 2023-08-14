@@ -20,6 +20,15 @@ namespace CapaNegocios.Acciones
             return dbLibContext.TM_Libros.Where(i => i.ID_Libro == id).FirstOrDefault();
         }
 
+        public List<TD_Reserva_Libro> listResrvasLibros()
+        {
+            return dbLibContext.TD_Reserva_Libros.ToList();
+        }
+
+        public List<TM_Estudiante> listEstudiantes()
+        {
+            return dbLibContext.TM_Estudiantes.ToList();
+        }
 
         public List<TM_Salones_Reunione> listSalones()
         {

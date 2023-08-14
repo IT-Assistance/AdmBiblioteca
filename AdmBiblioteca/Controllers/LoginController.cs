@@ -27,6 +27,9 @@ namespace AdmBiblioteca.Controllers
                 {
                     ModelState.AddModelError("email", "Email o contrasena no validos");
                     return View("Index");
+                }else
+                {
+                    return RedirectToAction("Index", "Libros");
                 }
             }
             else
@@ -37,9 +40,12 @@ namespace AdmBiblioteca.Controllers
                     ModelState.AddModelError("email", "Email o contrasena no validos");
                     return View("Index");
                 }
+                else
+                {
+                    return RedirectToAction("Index", "ReservaLibros");
+                }
             }
 
-            return RedirectToAction("Index", "Libros");
         }
     }
 }
