@@ -1,7 +1,4 @@
-﻿using CapaDatos.Database;
-using CapaModelo.Modelos;
-using CapaNegocios.Acciones;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,55 +6,33 @@ using System.Web.Mvc;
 
 namespace AdmBiblioteca.Controllers
 {
-    public class LibrosController : Controller
+    public class SalonReunionesController : Controller
     {
-        mLibros accionModelos = new mLibros();
-        AccionesConsulta servicio = new AccionesConsulta();
-        // GET: Libros
+        // GET: SalonReuniones
         public ActionResult Index()
         {
-            accionModelos.listaLibro = servicio.listLibros();
-            return View(accionModelos);
+            return View();
         }
 
-        // GET: Libros/Details/5
+        // GET: SalonReuniones/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Libros/Create
+        // GET: SalonReuniones/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Libros/Create
+        // POST: SalonReuniones/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
-                TM_Libro libro = new TM_Libro()
-                {
-                    Nombre_Libro = collection.Get("nombre"),
-                    Nombre_Autor = collection.Get("autor"),
-                    Genero = collection.Get("genero"),
-                    Numero_Paginas = int.Parse(collection.Get("paginas")),
-                };
-
-                var id = collection.Get("id");
-                if (id != "")
-                {
-                    libro.ID_Libro = int.Parse(id);
-                    servicio.actualizarLibro(libro);
-                }
-                else
-                {
-                    servicio.insertLibro(libro);
-
-                }
 
                 return RedirectToAction("Index");
             }
@@ -67,13 +42,13 @@ namespace AdmBiblioteca.Controllers
             }
         }
 
-        // GET: Libros/Edit/5
+        // GET: SalonReuniones/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Libros/Edit/5
+        // POST: SalonReuniones/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -89,26 +64,25 @@ namespace AdmBiblioteca.Controllers
             }
         }
 
-        // GET: Libros/Delete/5
+        // GET: SalonReuniones/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Libros/Delete/5
+        // POST: SalonReuniones/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-                servicio.eliminarLibro(id);
 
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch
             {
-                return RedirectToAction("Index");
+                return View();
             }
         }
     }

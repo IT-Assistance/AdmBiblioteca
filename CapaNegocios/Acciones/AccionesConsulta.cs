@@ -54,7 +54,7 @@ namespace CapaNegocios.Acciones
         public void eliminarLibro(int id)
         {
             var item = getLibro(id);
-            dbLibContext.TM_Libros.DeleteOnSubmit(item);
+            item.FlagActivo = false;
             dbLibContext.SubmitChanges();
         }
     }

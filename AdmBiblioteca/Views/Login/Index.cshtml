@@ -1,4 +1,4 @@
-﻿
+﻿@model CapaModelo.Modelos.mLogin
 @{
     Layout = null;
 }
@@ -29,15 +29,24 @@
             <div class="login-form">
                 <form method="post" action="/Login/IniciarSesion">
                     <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="text" required class="form-control" placeholder="Usuario">
+                        <label>Tipo de usuario</label>
+                        <select required name="tipoUsuario" class="form-control">
+                            <option value="1">Administrador</option>
+                            <option value="2">Estudiante</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="password" required class="form-control" placeholder="Contraseña">
+                        <input type="password" name="password" required class="form-control" placeholder="Contraseña">
                     </div>
+                    <p style="color:red">@Html.ValidationMessageFor(m => m.Email)</p>
                     <button type="submit" class="btn btn-black">Iniciar Sesión</button>
                     <button type="submit" class="btn btn-secondary">Registrarse</button>
+
                 </form>
             </div>
         </div>

@@ -30,12 +30,12 @@ namespace CapaDatos.Database
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertTM_Usuario(TM_Usuario instance);
+    partial void UpdateTM_Usuario(TM_Usuario instance);
+    partial void DeleteTM_Usuario(TM_Usuario instance);
     partial void InsertTD_Reserva_Espacio_Trabajo(TD_Reserva_Espacio_Trabajo instance);
     partial void UpdateTD_Reserva_Espacio_Trabajo(TD_Reserva_Espacio_Trabajo instance);
     partial void DeleteTD_Reserva_Espacio_Trabajo(TD_Reserva_Espacio_Trabajo instance);
-    partial void InsertTM_Salones_Reunione(TM_Salones_Reunione instance);
-    partial void UpdateTM_Salones_Reunione(TM_Salones_Reunione instance);
-    partial void DeleteTM_Salones_Reunione(TM_Salones_Reunione instance);
     partial void InsertTD_Reserva_Libro(TD_Reserva_Libro instance);
     partial void UpdateTD_Reserva_Libro(TD_Reserva_Libro instance);
     partial void DeleteTD_Reserva_Libro(TD_Reserva_Libro instance);
@@ -51,6 +51,9 @@ namespace CapaDatos.Database
     partial void InsertTM_Libro(TM_Libro instance);
     partial void UpdateTM_Libro(TM_Libro instance);
     partial void DeleteTM_Libro(TM_Libro instance);
+    partial void InsertTM_Salones_Reunione(TM_Salones_Reunione instance);
+    partial void UpdateTM_Salones_Reunione(TM_Salones_Reunione instance);
+    partial void DeleteTM_Salones_Reunione(TM_Salones_Reunione instance);
     #endregion
 		
 		public DbLibraryEntityDataContext() : 
@@ -83,19 +86,19 @@ namespace CapaDatos.Database
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<TM_Usuario> TM_Usuarios
+		{
+			get
+			{
+				return this.GetTable<TM_Usuario>();
+			}
+		}
+		
 		public System.Data.Linq.Table<TD_Reserva_Espacio_Trabajo> TD_Reserva_Espacio_Trabajos
 		{
 			get
 			{
 				return this.GetTable<TD_Reserva_Espacio_Trabajo>();
-			}
-		}
-		
-		public System.Data.Linq.Table<TM_Salones_Reunione> TM_Salones_Reuniones
-		{
-			get
-			{
-				return this.GetTable<TM_Salones_Reunione>();
 			}
 		}
 		
@@ -138,6 +141,196 @@ namespace CapaDatos.Database
 				return this.GetTable<TM_Libro>();
 			}
 		}
+		
+		public System.Data.Linq.Table<TM_Salones_Reunione> TM_Salones_Reuniones
+		{
+			get
+			{
+				return this.GetTable<TM_Salones_Reunione>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TM_Usuario")]
+	public partial class TM_Usuario : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Usuario;
+		
+		private string _Nombre;
+		
+		private string _Email;
+		
+		private string _Contrasena;
+		
+		private int _Tipo_Usuario;
+		
+		private bool _FlagActivo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_UsuarioChanging(int value);
+    partial void OnID_UsuarioChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnContrasenaChanging(string value);
+    partial void OnContrasenaChanged();
+    partial void OnTipo_UsuarioChanging(int value);
+    partial void OnTipo_UsuarioChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
+    #endregion
+		
+		public TM_Usuario()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Usuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Usuario
+		{
+			get
+			{
+				return this._ID_Usuario;
+			}
+			set
+			{
+				if ((this._ID_Usuario != value))
+				{
+					this.OnID_UsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Usuario = value;
+					this.SendPropertyChanged("ID_Usuario");
+					this.OnID_UsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(300) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Contrasena
+		{
+			get
+			{
+				return this._Contrasena;
+			}
+			set
+			{
+				if ((this._Contrasena != value))
+				{
+					this.OnContrasenaChanging(value);
+					this.SendPropertyChanging();
+					this._Contrasena = value;
+					this.SendPropertyChanged("Contrasena");
+					this.OnContrasenaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo_Usuario", DbType="Int NOT NULL")]
+		public int Tipo_Usuario
+		{
+			get
+			{
+				return this._Tipo_Usuario;
+			}
+			set
+			{
+				if ((this._Tipo_Usuario != value))
+				{
+					this.OnTipo_UsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Tipo_Usuario = value;
+					this.SendPropertyChanged("Tipo_Usuario");
+					this.OnTipo_UsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TD_Reserva_Espacio_Trabajo")]
@@ -155,6 +348,8 @@ namespace CapaDatos.Database
 		private System.DateTime _Inicio_Reserva;
 		
 		private System.DateTime _Final_Reserva;
+		
+		private bool _FlagActivo;
 		
 		private EntityRef<TM_Espacio_Trabajo> _TM_Espacio_Trabajo;
 		
@@ -174,6 +369,8 @@ namespace CapaDatos.Database
     partial void OnInicio_ReservaChanged();
     partial void OnFinal_ReservaChanging(System.DateTime value);
     partial void OnFinal_ReservaChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
     #endregion
 		
 		public TD_Reserva_Espacio_Trabajo()
@@ -291,6 +488,26 @@ namespace CapaDatos.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Espacio_Trabajo_TD_Reserva_Espacio_Trabajo", Storage="_TM_Espacio_Trabajo", ThisKey="ID_Espacio", OtherKey="ID_Espacio", IsForeignKey=true)]
 		public TM_Espacio_Trabajo TM_Espacio_Trabajo
 		{
@@ -380,144 +597,6 @@ namespace CapaDatos.Database
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TM_Salones_Reuniones")]
-	public partial class TM_Salones_Reunione : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Salon;
-		
-		private string _Nombre_Salon;
-		
-		private int _Capacidad;
-		
-		private EntitySet<TD_Reserva_salones_reunione> _TD_Reserva_salones_reuniones;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_SalonChanging(int value);
-    partial void OnID_SalonChanged();
-    partial void OnNombre_SalonChanging(string value);
-    partial void OnNombre_SalonChanged();
-    partial void OnCapacidadChanging(int value);
-    partial void OnCapacidadChanged();
-    #endregion
-		
-		public TM_Salones_Reunione()
-		{
-			this._TD_Reserva_salones_reuniones = new EntitySet<TD_Reserva_salones_reunione>(new Action<TD_Reserva_salones_reunione>(this.attach_TD_Reserva_salones_reuniones), new Action<TD_Reserva_salones_reunione>(this.detach_TD_Reserva_salones_reuniones));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Salon", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Salon
-		{
-			get
-			{
-				return this._ID_Salon;
-			}
-			set
-			{
-				if ((this._ID_Salon != value))
-				{
-					this.OnID_SalonChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Salon = value;
-					this.SendPropertyChanged("ID_Salon");
-					this.OnID_SalonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre_Salon", DbType="VarChar(30)")]
-		public string Nombre_Salon
-		{
-			get
-			{
-				return this._Nombre_Salon;
-			}
-			set
-			{
-				if ((this._Nombre_Salon != value))
-				{
-					this.OnNombre_SalonChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre_Salon = value;
-					this.SendPropertyChanged("Nombre_Salon");
-					this.OnNombre_SalonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Capacidad", DbType="Int NOT NULL")]
-		public int Capacidad
-		{
-			get
-			{
-				return this._Capacidad;
-			}
-			set
-			{
-				if ((this._Capacidad != value))
-				{
-					this.OnCapacidadChanging(value);
-					this.SendPropertyChanging();
-					this._Capacidad = value;
-					this.SendPropertyChanged("Capacidad");
-					this.OnCapacidadChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Salones_Reunione_TD_Reserva_salones_reunione", Storage="_TD_Reserva_salones_reuniones", ThisKey="ID_Salon", OtherKey="ID_Salon")]
-		public EntitySet<TD_Reserva_salones_reunione> TD_Reserva_salones_reuniones
-		{
-			get
-			{
-				return this._TD_Reserva_salones_reuniones;
-			}
-			set
-			{
-				this._TD_Reserva_salones_reuniones.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TD_Reserva_salones_reuniones(TD_Reserva_salones_reunione entity)
-		{
-			this.SendPropertyChanging();
-			entity.TM_Salones_Reunione = this;
-		}
-		
-		private void detach_TD_Reserva_salones_reuniones(TD_Reserva_salones_reunione entity)
-		{
-			this.SendPropertyChanging();
-			entity.TM_Salones_Reunione = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TD_Reserva_Libro")]
 	public partial class TD_Reserva_Libro : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -533,6 +612,8 @@ namespace CapaDatos.Database
 		private System.DateTime _Inicio_Reserva;
 		
 		private System.DateTime _Final_Reserva;
+		
+		private bool _FlagActivo;
 		
 		private EntityRef<TM_Estudiante> _TM_Estudiante;
 		
@@ -552,6 +633,8 @@ namespace CapaDatos.Database
     partial void OnInicio_ReservaChanged();
     partial void OnFinal_ReservaChanging(System.DateTime value);
     partial void OnFinal_ReservaChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
     #endregion
 		
 		public TD_Reserva_Libro()
@@ -669,6 +752,26 @@ namespace CapaDatos.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Estudiante_TD_Reserva_Libro", Storage="_TM_Estudiante", ThisKey="Matricula", OtherKey="Matricula", IsForeignKey=true)]
 		public TM_Estudiante TM_Estudiante
 		{
@@ -774,9 +877,11 @@ namespace CapaDatos.Database
 		
 		private System.DateTime _Final_Reserva;
 		
-		private EntityRef<TM_Salones_Reunione> _TM_Salones_Reunione;
+		private bool _FlagActivo;
 		
 		private EntityRef<TM_Estudiante> _TM_Estudiante;
+		
+		private EntityRef<TM_Salones_Reunione> _TM_Salones_Reunione;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -792,12 +897,14 @@ namespace CapaDatos.Database
     partial void OnInicio_ReservaChanged();
     partial void OnFinal_ReservaChanging(System.DateTime value);
     partial void OnFinal_ReservaChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
     #endregion
 		
 		public TD_Reserva_salones_reunione()
 		{
-			this._TM_Salones_Reunione = default(EntityRef<TM_Salones_Reunione>);
 			this._TM_Estudiante = default(EntityRef<TM_Estudiante>);
+			this._TM_Salones_Reunione = default(EntityRef<TM_Salones_Reunione>);
 			OnCreated();
 		}
 		
@@ -909,36 +1016,22 @@ namespace CapaDatos.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Salones_Reunione_TD_Reserva_salones_reunione", Storage="_TM_Salones_Reunione", ThisKey="ID_Salon", OtherKey="ID_Salon", IsForeignKey=true)]
-		public TM_Salones_Reunione TM_Salones_Reunione
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
 		{
 			get
 			{
-				return this._TM_Salones_Reunione.Entity;
+				return this._FlagActivo;
 			}
 			set
 			{
-				TM_Salones_Reunione previousValue = this._TM_Salones_Reunione.Entity;
-				if (((previousValue != value) 
-							|| (this._TM_Salones_Reunione.HasLoadedOrAssignedValue == false)))
+				if ((this._FlagActivo != value))
 				{
+					this.OnFlagActivoChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TM_Salones_Reunione.Entity = null;
-						previousValue.TD_Reserva_salones_reuniones.Remove(this);
-					}
-					this._TM_Salones_Reunione.Entity = value;
-					if ((value != null))
-					{
-						value.TD_Reserva_salones_reuniones.Add(this);
-						this._ID_Salon = value.ID_Salon;
-					}
-					else
-					{
-						this._ID_Salon = default(int);
-					}
-					this.SendPropertyChanged("TM_Salones_Reunione");
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
 				}
 			}
 		}
@@ -977,6 +1070,40 @@ namespace CapaDatos.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Salones_Reunione_TD_Reserva_salones_reunione", Storage="_TM_Salones_Reunione", ThisKey="ID_Salon", OtherKey="ID_Salon", IsForeignKey=true)]
+		public TM_Salones_Reunione TM_Salones_Reunione
+		{
+			get
+			{
+				return this._TM_Salones_Reunione.Entity;
+			}
+			set
+			{
+				TM_Salones_Reunione previousValue = this._TM_Salones_Reunione.Entity;
+				if (((previousValue != value) 
+							|| (this._TM_Salones_Reunione.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TM_Salones_Reunione.Entity = null;
+						previousValue.TD_Reserva_salones_reuniones.Remove(this);
+					}
+					this._TM_Salones_Reunione.Entity = value;
+					if ((value != null))
+					{
+						value.TD_Reserva_salones_reuniones.Add(this);
+						this._ID_Salon = value.ID_Salon;
+					}
+					else
+					{
+						this._ID_Salon = default(int);
+					}
+					this.SendPropertyChanged("TM_Salones_Reunione");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1008,6 +1135,8 @@ namespace CapaDatos.Database
 		
 		private string _Nombre_Espacio;
 		
+		private bool _FlagActivo;
+		
 		private EntitySet<TD_Reserva_Espacio_Trabajo> _TD_Reserva_Espacio_Trabajos;
 		
     #region Extensibility Method Definitions
@@ -1018,6 +1147,8 @@ namespace CapaDatos.Database
     partial void OnID_EspacioChanged();
     partial void OnNombre_EspacioChanging(string value);
     partial void OnNombre_EspacioChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
     #endregion
 		
 		public TM_Espacio_Trabajo()
@@ -1062,6 +1193,26 @@ namespace CapaDatos.Database
 					this._Nombre_Espacio = value;
 					this.SendPropertyChanged("Nombre_Espacio");
 					this.OnNombre_EspacioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
 				}
 			}
 		}
@@ -1128,6 +1279,10 @@ namespace CapaDatos.Database
 		
 		private string _Carrera;
 		
+		private bool _FlagActivo;
+		
+		private string _Contrasena;
+		
 		private EntitySet<TD_Reserva_Espacio_Trabajo> _TD_Reserva_Espacio_Trabajos;
 		
 		private EntitySet<TD_Reserva_Libro> _TD_Reserva_Libros;
@@ -1148,6 +1303,10 @@ namespace CapaDatos.Database
     partial void OnEmailChanged();
     partial void OnCarreraChanging(string value);
     partial void OnCarreraChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
+    partial void OnContrasenaChanging(string value);
+    partial void OnContrasenaChanged();
     #endregion
 		
 		public TM_Estudiante()
@@ -1254,6 +1413,46 @@ namespace CapaDatos.Database
 					this._Carrera = value;
 					this.SendPropertyChanged("Carrera");
 					this.OnCarreraChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(500)")]
+		public string Contrasena
+		{
+			get
+			{
+				return this._Contrasena;
+			}
+			set
+			{
+				if ((this._Contrasena != value))
+				{
+					this.OnContrasenaChanging(value);
+					this.SendPropertyChanging();
+					this._Contrasena = value;
+					this.SendPropertyChanged("Contrasena");
+					this.OnContrasenaChanged();
 				}
 			}
 		}
@@ -1370,6 +1569,8 @@ namespace CapaDatos.Database
 		
 		private string _Genero;
 		
+		private bool _FlagActivo;
+		
 		private EntitySet<TD_Reserva_Libro> _TD_Reserva_Libros;
 		
     #region Extensibility Method Definitions
@@ -1386,6 +1587,8 @@ namespace CapaDatos.Database
     partial void OnNumero_PaginasChanged();
     partial void OnGeneroChanging(string value);
     partial void OnGeneroChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
     #endregion
 		
 		public TM_Libro()
@@ -1494,6 +1697,26 @@ namespace CapaDatos.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Libro_TD_Reserva_Libro", Storage="_TD_Reserva_Libros", ThisKey="ID_Libro", OtherKey="ID_Libro")]
 		public EntitySet<TD_Reserva_Libro> TD_Reserva_Libros
 		{
@@ -1537,6 +1760,168 @@ namespace CapaDatos.Database
 		{
 			this.SendPropertyChanging();
 			entity.TM_Libro = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TM_Salones_Reuniones")]
+	public partial class TM_Salones_Reunione : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Salon;
+		
+		private string _Nombre_Salon;
+		
+		private int _Capacidad;
+		
+		private bool _FlagActivo;
+		
+		private EntitySet<TD_Reserva_salones_reunione> _TD_Reserva_salones_reuniones;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_SalonChanging(int value);
+    partial void OnID_SalonChanged();
+    partial void OnNombre_SalonChanging(string value);
+    partial void OnNombre_SalonChanged();
+    partial void OnCapacidadChanging(int value);
+    partial void OnCapacidadChanged();
+    partial void OnFlagActivoChanging(bool value);
+    partial void OnFlagActivoChanged();
+    #endregion
+		
+		public TM_Salones_Reunione()
+		{
+			this._TD_Reserva_salones_reuniones = new EntitySet<TD_Reserva_salones_reunione>(new Action<TD_Reserva_salones_reunione>(this.attach_TD_Reserva_salones_reuniones), new Action<TD_Reserva_salones_reunione>(this.detach_TD_Reserva_salones_reuniones));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Salon", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Salon
+		{
+			get
+			{
+				return this._ID_Salon;
+			}
+			set
+			{
+				if ((this._ID_Salon != value))
+				{
+					this.OnID_SalonChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Salon = value;
+					this.SendPropertyChanged("ID_Salon");
+					this.OnID_SalonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre_Salon", DbType="VarChar(30)")]
+		public string Nombre_Salon
+		{
+			get
+			{
+				return this._Nombre_Salon;
+			}
+			set
+			{
+				if ((this._Nombre_Salon != value))
+				{
+					this.OnNombre_SalonChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre_Salon = value;
+					this.SendPropertyChanged("Nombre_Salon");
+					this.OnNombre_SalonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Capacidad", DbType="Int NOT NULL")]
+		public int Capacidad
+		{
+			get
+			{
+				return this._Capacidad;
+			}
+			set
+			{
+				if ((this._Capacidad != value))
+				{
+					this.OnCapacidadChanging(value);
+					this.SendPropertyChanging();
+					this._Capacidad = value;
+					this.SendPropertyChanged("Capacidad");
+					this.OnCapacidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlagActivo", DbType="Bit NOT NULL")]
+		public bool FlagActivo
+		{
+			get
+			{
+				return this._FlagActivo;
+			}
+			set
+			{
+				if ((this._FlagActivo != value))
+				{
+					this.OnFlagActivoChanging(value);
+					this.SendPropertyChanging();
+					this._FlagActivo = value;
+					this.SendPropertyChanged("FlagActivo");
+					this.OnFlagActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TM_Salones_Reunione_TD_Reserva_salones_reunione", Storage="_TD_Reserva_salones_reuniones", ThisKey="ID_Salon", OtherKey="ID_Salon")]
+		public EntitySet<TD_Reserva_salones_reunione> TD_Reserva_salones_reuniones
+		{
+			get
+			{
+				return this._TD_Reserva_salones_reuniones;
+			}
+			set
+			{
+				this._TD_Reserva_salones_reuniones.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TD_Reserva_salones_reuniones(TD_Reserva_salones_reunione entity)
+		{
+			this.SendPropertyChanging();
+			entity.TM_Salones_Reunione = this;
+		}
+		
+		private void detach_TD_Reserva_salones_reuniones(TD_Reserva_salones_reunione entity)
+		{
+			this.SendPropertyChanging();
+			entity.TM_Salones_Reunione = null;
 		}
 	}
 }

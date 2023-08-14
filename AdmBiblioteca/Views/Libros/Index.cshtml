@@ -1,7 +1,7 @@
 ﻿
+@model CapaModelo.Modelos.mLibros
 @{
     ViewBag.Title = "Index";
-    var list = ViewBag.List;
 }
 
 <h2>Mantenimiento Libros</h2>
@@ -44,27 +44,36 @@
                     <th>Autor</th>
                     <th>Genero</th>
                     <th>Paginas</th>
+                    <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in list)
+                @foreach (var item in Model.listaLibro)
                 {
-                    <tr>
-                        <td>@item.ID_Libro</td>
-                        <td>@item.Nombre_Libro</td>
-                        <td>@item.Nombre_Autor</td>
-                        <td>@item.Genero</td>
-                        <td>@item.Numero_Paginas</td>
-                        <td>
-                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Libro,'@item.Nombre_Libro','@item.Nombre_Autor','@item.Genero','@item.Numero_Paginas')">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@item.ID_Libro</td>
+                    <td>@item.Nombre_Libro</td>
+                    <td>@item.Nombre_Autor</td>
+                    <td>@item.Genero</td>
+                    <td>@item.Numero_Paginas</td>
+                    @if (@item.FlagActivo)
+                    {
+                        <td style="color: forestgreen">Activo</td>
+                    }
+                    else
+                    {
+                        <td style="color: darkred">Inactivo</td>
+                    }
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Libro,'@item.Nombre_Libro','@item.Nombre_Autor','@item.Genero','@item.Numero_Paginas')">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

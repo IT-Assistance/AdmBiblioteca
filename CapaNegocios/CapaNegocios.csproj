@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Acciones\AccionesBase.cs" />
     <Compile Include="Acciones\AccionesConsulta.cs" />
+    <Compile Include="Acciones\AccionesUsuario.cs" />
+    <Compile Include="Helpers\PasswordEncryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
