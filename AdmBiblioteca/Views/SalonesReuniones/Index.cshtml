@@ -1,0 +1,91 @@
+﻿
+@model CapaModelo.Modelos.mSalonesReuniones
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mantenimiento Salones Reuniones</h2>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post" action="/salonesReuniones/create" id="formulario">
+            <input type="number" hidden id="id" name="id">
+
+            <div class="form-group">
+                <label for="nombre">Nombre salon</label>
+                <input required type="text" class="form-control" id="nombre" name="nombre">
+            </div>
+
+            <div class="form-group">
+                <label for="paginas">Capacidad</label>
+                <input required type="number" class="form-control" id="capacidad" name="capacidad" min="1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre salon</th>
+                    <th>Capacidad</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Salones_Reuniones)
+                {
+                    <tr>
+                        <td>@item.ID_Salon</td>
+                        <td>@item.Nombre_Salon</td>
+                        <td>@item.Capacidad</td>
+                        @if (@item.FlagActivo)
+                        {
+                            <td style="color: forestgreen">Activo</td>
+                        }
+                        else
+                        {
+                            <td style="color: darkred">Inactivo</td>
+                        }
+                        <td>
+                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Salon, '@item.Nombre_Salon', '@item.Capacidad')">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Salon)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<script>
+    function editar(id, nombre, capacidad) {
+        $("#id").val(id);
+        $("#nombre").val(nombre);
+        $("#capacidad").val(capacidad);
+    }
+
+    function eliminar(id) {
+        const opcion = confirm("Desea Eliminar?");
+
+        if (!opcion)
+            return;
+
+        $.ajax({
+            type: "POST",
+            url: "/SalonesReuniones/Delete/" + id,
+            success: () => location.reload(),
+        });
+    }
+</script>
+

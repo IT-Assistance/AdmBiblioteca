@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CapaDatos.Database;
+using CapaModelo.Modelos;
+using CapaNegocios.Acciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +9,18 @@ using System.Web.Mvc;
 
 namespace AdmBiblioteca.Controllers
 {
-    public class SalonReunionesController : Controller
+    public class SalonesReunionesController : Controller
     {
+        AccionesConsulta servicio = new AccionesConsulta();
         // GET: SalonReuniones
         public ActionResult Index()
         {
-            return View();
+            var list = servicio.listSalones();
+            var modelo = new mSalonesReuniones()
+            {
+                Salones_Reuniones = list
+            };
+            return View(modelo);
         }
 
         // GET: SalonReuniones/Details/5
@@ -33,6 +42,23 @@ namespace AdmBiblioteca.Controllers
             try
             {
                 // TODO: Add insert logic here
+                TM_Salones_Reunione salon = new TM_Salones_Reunione()
+                {
+                    Nombre_Salon = collection.Get("nombre"),
+                    Capacidad = int.Parse(collection.Get("capacidad")),
+                };
+
+                var id = collection.Get("id");
+                if (id != "")
+                {
+                    salon.ID_Salon = int.Parse(id);
+                    servicio.actualizarSalon(salon);
+                }
+                else
+                {
+                    servicio.inserSalon(salon);
+
+                }
 
                 return RedirectToAction("Index");
             }
@@ -77,12 +103,13 @@ namespace AdmBiblioteca.Controllers
             try
             {
                 // TODO: Add delete logic here
+                servicio.eliminarSalon(id);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
     }

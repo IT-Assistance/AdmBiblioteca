@@ -42,7 +42,7 @@ namespace AdmBiblioteca.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "ReservaLibros");
+                    return RedirectToAction("Index", "ReservaLibro");
                 }
             }
 

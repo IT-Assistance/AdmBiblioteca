@@ -12,14 +12,14 @@ namespace CapaNegocios.Acciones
     {
         public TM_Usuario loginAdministrador(string email, string password)
         {
-            //string encryptedPassword = PasswordEncryptor.EncryptPassword(password);
-            return dbLibContext.TM_Usuarios.Where(i => i.Email == email && i.Contrasena == password).FirstOrDefault();
+            string encryptedPassword = PasswordEncryptor.EncryptPassword(password);
+            return dbLibContext.TM_Usuarios.Where(i => i.Email == email && i.Contrasena == encryptedPassword).FirstOrDefault();
         }
 
         public TM_Estudiante loginEstudiante(string email, string password)
         {
-            //string encryptedPassword = PasswordEncryptor.EncryptPassword(password);
-            return dbLibContext.TM_Estudiantes.Where(i => i.Email == email && i.Contrasena == password).FirstOrDefault();
+            string encryptedPassword = PasswordEncryptor.EncryptPassword(password);
+            return dbLibContext.TM_Estudiantes.Where(i => i.Email == email && i.Contrasena == encryptedPassword).FirstOrDefault();
         }
 
     }

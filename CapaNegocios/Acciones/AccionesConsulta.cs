@@ -20,6 +20,11 @@ namespace CapaNegocios.Acciones
             return dbLibContext.TM_Libros.Where(i => i.ID_Libro == id).FirstOrDefault();
         }
 
+        public TM_Salones_Reunione getSalon(int id)
+        {
+            return dbLibContext.TM_Salones_Reuniones.Where(i => i.ID_Salon == id).FirstOrDefault();
+        }
+
         public List<TD_Reserva_Libro> listResrvasLibros()
         {
             return dbLibContext.TD_Reserva_Libros.ToList();
@@ -45,6 +50,7 @@ namespace CapaNegocios.Acciones
 
         public void insertLibro(TM_Libro libro)
         {
+            libro.FlagActivo = true;
             dbLibContext.TM_Libros.InsertOnSubmit(libro);
             dbLibContext.SubmitChanges();
         }
@@ -57,6 +63,29 @@ namespace CapaNegocios.Acciones
             item.Numero_Paginas = libro.Numero_Paginas;
             item.Genero = libro.Genero;
 
+            dbLibContext.SubmitChanges();
+        }
+
+        public void inserSalon(TM_Salones_Reunione salon)
+        {
+            salon.FlagActivo = true;
+            dbLibContext.TM_Salones_Reuniones.InsertOnSubmit(salon);
+            dbLibContext.SubmitChanges();
+        }
+
+        public void actualizarSalon(TM_Salones_Reunione salon)
+        {
+            var item = getSalon(salon.ID_Salon);
+            item.Nombre_Salon = salon.Nombre_Salon;
+            item.Capacidad = salon.Capacidad;
+
+            dbLibContext.SubmitChanges();
+        }
+
+        public void eliminarSalon(int id)
+        {
+            var item = getSalon(id);
+            item.FlagActivo = false;
             dbLibContext.SubmitChanges();
         }
 
