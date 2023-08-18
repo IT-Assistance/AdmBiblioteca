@@ -124,6 +124,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibrosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReservaEspacioTrabajoController.cs" />
     <Compile Include="Controllers\ReservaLibroController.cs" />
     <Compile Include="Controllers\ReservaSalonController.cs" />
     <Compile Include="Controllers\SalonesReunionesController.cs" />
@@ -175,11 +176,13 @@
     <Content Include="Views\SalonesReuniones\Index.cshtml" />
     <Content Include="Views\EspacioTrabajo\Index.cshtml" />
     <Content Include="Views\ReservaSalon\Index.cshtml" />
+    <Content Include="Views\ReservaEspacioTrabajo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\SalonReuniones\" />
+    <Folder Include="Views\tests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

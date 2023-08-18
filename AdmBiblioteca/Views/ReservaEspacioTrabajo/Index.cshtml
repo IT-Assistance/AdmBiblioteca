@@ -1,0 +1,129 @@
+﻿@model CapaModelo.Modelos.mReservaEspacioTrabajo
+@{
+    ViewBag.Title = "Reserva Espacio de Trabajo";
+}
+
+<h2>Reserva Espacio de Trabajo</h2>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post" action="/ReservaEspacioTrabajo/Create" id="formulario">
+            <input type="number" hidden id="id" name="id">
+            <input type="number" hidden id="estudianteId" name="estudianteId">
+
+            <div class="form-group">
+                <label for="nombre">Estudiante</label>
+                @Html.DropDownList("estudiante", new SelectList(Model.Estudiantes, "Matricula", "Nombre"), new { @class = "form-control", @required = true })
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">Espacio de Trabajo</label>
+                @Html.DropDownList("espacio", new SelectList(Model.EspaciosTrabajo, "ID_Espacio", "Nombre_Espacio"), new { @class = "form-control", @required = true })
+            </div>
+
+            <div class="form-group">
+                <label for="autor">Fecha Inicio</label>
+                <input required type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+            </div>
+
+            <div class="form-group">
+                <label for="autor">Fecha Fin</label>
+                <input required type="date" class="form-control" id="fechaFin" name="fechaFin">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Espacio de Trabajo</th>
+                    <th>Estudiante</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Reservas_Espacios)
+                {
+                    <tr>
+                        <td>@item.ID_Reserva_Espacio</td>
+                        <td>@item.TM_Espacio_Trabajo.Nombre_Espacio</td>
+                        <td>@item.TM_Estudiante.Nombre</td>
+                        <td>@item.Inicio_Reserva</td>
+                        <td>@item.Final_Reserva</td>
+                        @if (@item.FlagActivo)
+                        {
+                            <td style="color: forestgreen">Activo</td>
+                        }
+                        else
+                        {
+                            <td style="color: darkred">Inactivo</td>
+                        }
+                        <td>
+                            <button type="button"
+                                    class="btn btn-info btn-sm"
+                                    onclick="editar(@item.ID_Reserva_Espacio,@item.ID_Espacio,@item.Matricula, '@item.Inicio_Reserva', '@item.Final_Reserva')">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Reserva_Espacio, @item.FlagActivo)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<script>
+
+    (function () {
+        setTimeout(() => {
+            const userId = "@Model.EstudianteId";
+        if (userId) {
+            $("#estudiante").val(userId);
+            $("#estudianteId").val(userId);
+            $("#estudiante").prop('disabled', 'true');
+        }
+
+        }, 500)
+
+
+        setTimeout(() => {
+            console.log($("#formulario"))
+
+        }, 10000)
+    })();
+
+
+    function editar(id, espacio, estudiante, fechaInicio, fechaFin) {
+        $("#id").val(id);
+        $("#espacio").val(espacio);
+        $("#estudiante").val(estudiante);
+        $("#fechaInicio").val(new Date(fechaInicio).toISOString().split('T')[0]);
+        $("#fechaFin").val(new Date(fechaFin).toISOString().split('T')[0]);
+    }
+
+    function eliminar(id, activo) {
+        const opcion = confirm(activo?"Desea Eliminar?":"Desea Reactivar?");
+
+        if (!opcion)
+            return;
+
+        $.ajax({
+            type: "POST",
+            url: "/ReservaEspacioTrabajo/Delete/" + id,
+            success: () => location.reload(),
+        });
+    }
+</script>
+

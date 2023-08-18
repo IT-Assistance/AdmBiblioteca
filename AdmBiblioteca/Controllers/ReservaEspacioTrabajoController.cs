@@ -9,25 +9,24 @@ using System.Web.Mvc;
 
 namespace AdmBiblioteca.Controllers
 {
-    public class ReservaSalonController : Controller
+    public class ReservaEspacioTrabajoController : Controller
     {
-        // GET: ReservaSalon
         AccionesConsulta servicio = new AccionesConsulta();
-        // GET: ReservaLibro
+        // GET: ReservaEspacioTrabajo
         public ActionResult Index()
         {
-            var salones = servicio.listSalones();
-            var reservas = servicio.listReservasSalon();
+            var espacios = servicio.listEspacioTrabajo();
+            var reservas = servicio.listResrvasEspaciosTrabajo();
             var estudiantes = servicio.listEstudiantes();
             var estudianteId = Session["estudianteId"]?.ToString();
             if (estudianteId != null)
             {
                 reservas = reservas.Where(x => x.Matricula.ToString() == estudianteId).ToList();
             }
-            var model = new mReservaSalon()
+            var model = new mReservaEspacioTrabajo()
             {
-                Salones = salones,
-                Reservas_Salones = reservas,
+                EspaciosTrabajo = espacios,
+                Reservas_Espacios = reservas,
                 Estudiantes = estudiantes,
                 EstudianteId = estudianteId
             };
@@ -41,11 +40,10 @@ namespace AdmBiblioteca.Controllers
             try
             {
                 int matricula = collection.Get("estudianteId") != "" ? int.Parse(collection.Get("estudianteId")) : int.Parse(collection.Get("estudiante"));
-
                 // TODO: Add insert logic here
-                TD_Reserva_salones_reunione item = new TD_Reserva_salones_reunione()
+                TD_Reserva_Espacio_Trabajo item = new TD_Reserva_Espacio_Trabajo()
                 {
-                    ID_Salon = int.Parse(collection.Get("salon")),
+                    ID_Espacio = int.Parse(collection.Get("espacio")),
                     Matricula = matricula,
                     Inicio_Reserva = DateTime.Parse(collection.Get("fechaInicio")),
                     Final_Reserva = DateTime.Parse(collection.Get("fechaFin")),
@@ -54,12 +52,12 @@ namespace AdmBiblioteca.Controllers
                 var id = collection.Get("id");
                 if (id != "")
                 {
-                    item.ID_Reserva_Salon = int.Parse(id);
-                    servicio.actualizarReservaSalonReunion(item);
+                    item.ID_Reserva_Espacio = int.Parse(id);
+                    servicio.actualizarReservaEspacioTrabajo(item);
                 }
                 else
                 {
-                    servicio.insertReservaSalonReunion(item);
+                    servicio.insertReservaEspacioTrabajo(item);
 
                 }
 
@@ -77,7 +75,7 @@ namespace AdmBiblioteca.Controllers
             try
             {
                 // TODO: Add delete logic here
-                servicio.eliminarReservaSalon(id);
+                servicio.eliminarReservaEspacioTrabajo(id);
 
                 return RedirectToAction("Index");
             }
