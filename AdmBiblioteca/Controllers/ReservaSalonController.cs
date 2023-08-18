@@ -1,4 +1,5 @@
-﻿using CapaModelo.Modelos;
+﻿using CapaDatos.Database;
+using CapaModelo.Modelos;
 using CapaNegocios.Acciones;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,57 @@ namespace AdmBiblioteca.Controllers
                 EstudianteId = estudianteId
             };
             return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                TD_Reserva_salones_reunione item = new TD_Reserva_salones_reunione()
+                {
+                    ID_Salon = int.Parse(collection.Get("salon")),
+                    Matricula = int.Parse(collection.Get("estudianteId")),
+                    Inicio_Reserva = DateTime.Parse(collection.Get("fechaInicio")),
+                    Final_Reserva = DateTime.Parse(collection.Get("fechaFin")),
+                };
+
+                var id = collection.Get("id");
+                if (id != "")
+                {
+                    item.ID_Reserva_Salon = int.Parse(id);
+                    servicio.actualizarReservaSalonReunion(item);
+                }
+                else
+                {
+                    servicio.insertReservaSalonReunion(item);
+
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                servicio.eliminarReservaSalon(id);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

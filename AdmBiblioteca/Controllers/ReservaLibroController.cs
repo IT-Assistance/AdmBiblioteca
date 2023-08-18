@@ -43,7 +43,7 @@ namespace AdmBiblioteca.Controllers
                 TD_Reserva_Libro item = new TD_Reserva_Libro()
                 {
                     ID_Libro = int.Parse(collection.Get("libro")),
-                    Matricula = int.Parse(collection.Get("estudiante")),
+                    Matricula = int.Parse(collection.Get("estudianteId")),
                     Inicio_Reserva = DateTime.Parse(collection.Get("fechaInicio")),
                     Final_Reserva = DateTime.Parse(collection.Get("fechaFin")),
                 };

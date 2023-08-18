@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Sistema Biblioteca</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,26 +20,39 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*@if (Session["tipoUsuario"] == "1")*@
-                    
+                    @if (Session["tipoUsuario"] != null && Session["tipoUsuario"].ToString() == "1")
+                    {
                         <li>@Html.ActionLink("Libros", "Index", "Libros")</li>
                         <li>@Html.ActionLink("Salones", "Index", "SalonesReuniones")</li>
                         <li>@Html.ActionLink("Espacios de Trabajo", "Index", "EspacioTrabajo")</li>
-                    
+                    }
+
                     <li>@Html.ActionLink("Reservas Libros", "Index", "ReservaLibro")</li>
                     <li>@Html.ActionLink("Reservas Salones", "Index", "ReservaSalon")</li>
+                    <li>@Html.ActionLink("Reservas Espacios Trabajo", "Index", "ReservaEspacioTrabajo")</li>
+
                 </ul>
             </div>
-            <span class="username" style="color: #9d9d9d; position: absolute; top: 16px; right: 5vw;">
-                @Session["nombre"]
-            </span>
+            @if (Session["nombre"] != null)
+            {
+                <div style=" position: absolute; top: 16px; right: 5vw;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color: #9d9d9d;">
+                        Hola,  @Session["nombre"].ToString()  
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Login">Cerrar Sesion</a>
+                    </div>
+                </div>
+
+
+            }
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Sistema Biblioteca</p>
         </footer>
     </div>
 

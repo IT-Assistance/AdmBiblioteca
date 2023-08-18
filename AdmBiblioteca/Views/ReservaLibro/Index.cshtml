@@ -10,6 +10,7 @@
 
         <form method="post" action="/ReservaLibro/create" id="formulario">
             <input type="number" hidden id="id" name="id">
+            <input type="number" hidden id="estudianteId" name="estudianteId">
 
             <div class="form-group">
                 <label for="nombre">Estudiante</label>
@@ -91,6 +92,7 @@
             const userId = "@Model.EstudianteId";
         if (userId) {
             $("#estudiante").val(userId);
+            $("#estudianteId").val(userId);
             $("#estudiante").prop('disabled','true');
         }
 

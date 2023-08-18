@@ -182,7 +182,7 @@ namespace CapaNegocios.Acciones
         public void actualizarReservaSalonReunion(TD_Reserva_salones_reunione espacio)
         {
             var item = getReservaSalon(espacio.ID_Reserva_Salon);
-            item.ID_Reserva_Salon = espacio.ID_Reserva_Salon;
+            item.ID_Salon = espacio.ID_Salon;
             item.Inicio_Reserva = espacio.Inicio_Reserva;
             item.Final_Reserva = espacio.Final_Reserva;
             item.Matricula = espacio.Matricula;
@@ -215,7 +215,7 @@ namespace CapaNegocios.Acciones
         public void actualizarReservaLibro(TD_Reserva_Libro espacio)
         {
             var item = getReservaLibro(espacio.ID_Reserva_Libro);
-            item.ID_Reserva_Libro = espacio.ID_Reserva_Libro;
+            item.ID_Libro = espacio.ID_Libro;
             item.Inicio_Reserva = espacio.Inicio_Reserva;
             item.Final_Reserva = espacio.Final_Reserva;
             item.Matricula = espacio.Matricula;

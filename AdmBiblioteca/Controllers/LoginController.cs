@@ -13,6 +13,10 @@ namespace AdmBiblioteca.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            Session["tipoUsuario"] = null;
+            Session["nombre"] = null;
+            Session["estudianteId"] = null;
+            Session["idUsuario"] = null;
             return View();
         }
 
@@ -48,7 +52,7 @@ namespace AdmBiblioteca.Controllers
                     Session["tipoUsuario"] = 2;
                     Session["nombre"] = estudiante.Nombre;
                     Session["estudianteId"] = estudiante.Matricula;
-                    return RedirectToAction("Index", "ReservaLibro");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 

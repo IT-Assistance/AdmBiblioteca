@@ -1,15 +1,21 @@
 ﻿@model CapaModelo.Modelos.mReservaSalon
 @{
-    ViewBag.Title = "Reserva salon";
+    ViewBag.Title = "Reserva de Salon";
 }
 
-<h2>Reserva de Salon de Reuniones</h2>
+<h2>Reserva de Salones</h2>
 
 <div class="row">
     <div class="col-md-4">
 
-        <form method="post" action="/reservaSalon/create" id="formulario">
+        <form method="post" action="/ReservaSalon/create" id="formulario">
             <input type="number" hidden id="id" name="id">
+            <input type="number" hidden id="estudianteId" name="estudianteId">
+
+            <div class="form-group">
+                <label for="nombre">Estudiante</label>
+                @Html.DropDownList("estudiante", new SelectList(Model.Estudiantes, "Matricula", "Nombre"), new { @class = "form-control disabled", @required = true })
+            </div>
 
             <div class="form-group">
                 <label for="nombre">Salon</label>
@@ -17,18 +23,13 @@
             </div>
 
             <div class="form-group">
-                <label for="nombre">Estudiante</label>
-                @Html.DropDownList("estudiante", new SelectList(Model.Estudiantes, "Matricula", "Nombre"), new { @class = "form-control", @required = true })
-            </div>
-
-            <div class="form-group">
                 <label for="autor">Fecha Inicio</label>
-                <input required type="date" class="form-control" id="autor" name="fechaInicio">
+                <input required type="date" class="form-control" id="fechaInicio" name="fechaInicio">
             </div>
 
             <div class="form-group">
                 <label for="autor">Fecha Fin</label>
-                <input required type="date" class="form-control" id="autor" name="fechaFin">
+                <input required type="date" class="form-control" id="fechaFin" name="fechaFin">
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -41,6 +42,7 @@
                     <th>ID</th>
                     <th>Salon</th>
                     <th>Estudiante</th>
+                    <th>Inicio</th>
                     <th>Fin</th>
                     <th>Estatus</th>
                     <th>Acciones</th>
@@ -64,10 +66,12 @@
                             <td style="color: darkred">Inactivo</td>
                         }
                         <td>
-                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Reserva_Salon)">
+                            <button type="button"
+                                    class="btn btn-info btn-sm"
+                                    onclick="editar(@item.ID_Reserva_Salon,@item.ID_Salon,@item.Matricula, '@item.Inicio_Reserva', '@item.Final_Reserva')">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro, @item.FlagActivo)">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Reserva_Salon, @item.FlagActivo)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </td>
@@ -84,22 +88,29 @@
 
     (function () {
         setTimeout(() => {
-        const userId = @Model.EstudianteId;
+            const userId = "@Model.EstudianteId";
         if (userId) {
             $("#estudiante").val(userId);
-            $("#estudiante").prop('disabled','true');
+            $("#estudianteId").val(userId);
+            $("#estudiante").prop('disabled', 'true');
         }
 
         }, 500)
+
+
+        setTimeout(() => {
+            console.log($("#formulario"))
+
+        }, 10000)
     })();
 
 
-    function editar(id, nombre, autor, genero, paginas) {
+    function editar(id, salon, estudiante, fechaInicio, fechaFin) {
         $("#id").val(id);
-        $("#nombre").val(nombre);
-        $("#autor").val(autor);
-        $("#genero").val(genero);
-        $("#paginas").val(paginas);
+        $("#salon").val(salon);
+        $("#estudiante").val(estudiante);
+        $("#fechaInicio").val(new Date(fechaInicio).toISOString().split('T')[0]);
+        $("#fechaFin").val(new Date(fechaFin).toISOString().split('T')[0]);
     }
 
     function eliminar(id, activo) {
@@ -110,7 +121,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/reservaSalon/Delete/" + id,
+            url: "/ReservaSalon/Delete/" + id,
             success: () => location.reload(),
         });
     }
