@@ -172,11 +172,11 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\ReservaLibro\Index.cshtml" />
     <Content Include="Views\SalonesReuniones\Index.cshtml" />
+    <Content Include="Views\EspacioTrabajo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\EspacioTrabajo\" />
     <Folder Include="Views\SalonReuniones\" />
   </ItemGroup>
   <ItemGroup>

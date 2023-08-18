@@ -29,6 +29,9 @@ namespace AdmBiblioteca.Controllers
                     return View("Index");
                 }else
                 {
+                    Session["tipoUsuario"] = 1;
+                    Session["nombre"] = usuario.Nombre;
+                    Session["idUsuario"] = usuario.ID_Usuario;
                     return RedirectToAction("Index", "Libros");
                 }
             }
@@ -42,6 +45,9 @@ namespace AdmBiblioteca.Controllers
                 }
                 else
                 {
+                    Session["tipoUsuario"] = 2;
+                    Session["nombre"] = estudiante.Nombre;
+                    Session["estudianteId"] = estudiante.Matricula;
                     return RedirectToAction("Index", "ReservaLibro");
                 }
             }

@@ -1,25 +1,20 @@
 ﻿
-@model CapaModelo.Modelos.mSalonesReuniones
+@model CapaModelo.Modelos.mEspacioTrabajo
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Espacios de Trabajo";
 }
 
-<h2>Mantenimiento Salones Reuniones</h2>
+<h2>Mantenimiento Espacios de Trabajo</h2>
 
 <div class="row">
     <div class="col-md-4">
 
-        <form method="post" action="/salonesReuniones/create" id="formulario">
+        <form method="post" action="/espacioTrabajo/create" id="formulario">
             <input type="number" hidden id="id" name="id">
 
             <div class="form-group">
-                <label for="nombre">Nombre salon</label>
+                <label for="nombre">Nombre Espacio de Trabajo</label>
                 <input required type="text" class="form-control" id="nombre" name="nombre">
-            </div>
-
-            <div class="form-group">
-                <label for="paginas">Capacidad</label>
-                <input required type="number" class="form-control" id="capacidad" name="capacidad" min="1">
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -30,19 +25,17 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre salon</th>
-                    <th>Capacidad</th>
+                    <th>Nombre Espacio de Trabajo</th>
                     <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Salones_Reuniones)
+                @foreach (var item in Model.Espacio_Trabajos)
                 {
                     <tr>
-                        <td>@item.ID_Salon</td>
-                        <td>@item.Nombre_Salon</td>
-                        <td>@item.Capacidad</td>
+                        <td>@item.ID_Espacio</td>
+                        <td>@item.Nombre_Espacio</td>
                         @if (@item.FlagActivo)
                         {
                             <td style="color: forestgreen">Activo</td>
@@ -52,10 +45,10 @@
                             <td style="color: darkred">Inactivo</td>
                         }
                         <td>
-                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Salon, '@item.Nombre_Salon', '@item.Capacidad')">
+                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Espacio, '@item.Nombre_Espacio',)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Salon, @item.FlagActivo)">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Espacio, @item.FlagActivo)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </td>
@@ -69,10 +62,9 @@
 </div>
 
 <script>
-    function editar(id, nombre, capacidad) {
+    function editar(id, nombre) {
         $("#id").val(id);
         $("#nombre").val(nombre);
-        $("#capacidad").val(capacidad);
     }
 
     function eliminar(id, activo) {
@@ -83,7 +75,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/SalonesReuniones/Delete/" + id,
+            url: "/EspacioTrabajo/Delete/" + id,
             success: () => location.reload(),
         });
     }

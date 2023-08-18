@@ -29,11 +29,6 @@ namespace AdmBiblioteca.Controllers
             return View();
         }
 
-        // GET: SalonReuniones/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: SalonReuniones/Create
         [HttpPost]
@@ -66,34 +61,6 @@ namespace AdmBiblioteca.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: SalonReuniones/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: SalonReuniones/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: SalonReuniones/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: SalonReuniones/Delete/5

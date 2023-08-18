@@ -20,14 +20,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("Libros", "Index", "Libros")</li>
-                    <li>@Html.ActionLink("Salones", "Index", "SalonesReuniones")</li>
-                    <li>@Html.ActionLink("Reservas", "Index", "ReservaLibro")</li>
+                    @*@if (Session["tipoUsuario"] == "1")*@
+                    
+                        <li>@Html.ActionLink("Libros", "Index", "Libros")</li>
+                        <li>@Html.ActionLink("Salones", "Index", "SalonesReuniones")</li>
+                        <li>@Html.ActionLink("Espacios de Trabajo", "Index", "EspacioTrabajo")</li>
+                    
+                    <li>@Html.ActionLink("Reservas Libros", "Index", "ReservaLibro")</li>
                 </ul>
             </div>
+            <span class="username" style="color: #9d9d9d; position: absolute; top: 16px; right: 5vw;">
+                @Session["nombre"]
+            </span>
         </div>
     </div>
     <div class="container body-content">

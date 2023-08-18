@@ -12,5 +12,6 @@ namespace CapaModelo.Modelos
         public List<TM_Libro> Libros { get; set; }
         public List<TM_Estudiante> Estudiantes { get; set; }
         public List<TD_Reserva_Libro> ReservasLibros { get; set; }
+        public string EstudianteId { get; set; }
     }
 }

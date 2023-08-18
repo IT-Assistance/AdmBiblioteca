@@ -17,11 +17,17 @@ namespace AdmBiblioteca.Controllers
             var listaLibros = servicio.listLibros();
             var reservas = servicio.listResrvasLibros();
             var estudiantes = servicio.listEstudiantes();
+            var estudianteId = Session["estudianteId"]?.ToString();
+            if(estudianteId != null)
+            {
+                reservas = reservas.Where(x => x.Matricula.ToString() == estudianteId).ToList();
+            }
             var model = new mReservaLibros()
             {
                 Libros = listaLibros,
                 ReservasLibros = reservas,
-                Estudiantes = estudiantes
+                Estudiantes = estudiantes,
+                EstudianteId = estudianteId
             };
             return View(model);
         }

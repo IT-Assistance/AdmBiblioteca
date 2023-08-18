@@ -68,7 +68,7 @@
                             <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Reserva_Libro)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro)">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro, @item.FlagActivo)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </td>
@@ -82,6 +82,19 @@
 </div>
 
 <script>
+
+    (function () {
+        setTimeout(() => {
+        const userId = @Model.EstudianteId;
+        if (userId) {
+            $("#estudiante").val(userId);
+            $("#estudiante").prop('disabled','true');
+        }
+
+        }, 500)
+    })();
+
+
     function editar(id, nombre, autor, genero, paginas) {
         $("#id").val(id);
         $("#nombre").val(nombre);
@@ -90,8 +103,8 @@
         $("#paginas").val(paginas);
     }
 
-    function eliminar(id) {
-        const opcion = confirm("Desea Eliminar?");
+    function eliminar(id, activo) {
+        const opcion = confirm(activo?"Desea Eliminar?":"Desea Reactivar?");
 
         if (!opcion)
             return;

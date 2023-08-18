@@ -45,6 +45,7 @@ namespace CapaNegocios.Acciones
             return dbLibContext.TM_Espacio_Trabajos.ToList();
         }
 
+
         #endregion
 
 
@@ -85,14 +86,42 @@ namespace CapaNegocios.Acciones
         public void eliminarSalon(int id)
         {
             var item = getSalon(id);
-            item.FlagActivo = false;
+            item.FlagActivo = !item.FlagActivo;
             dbLibContext.SubmitChanges();
         }
 
         public void eliminarLibro(int id)
         {
             var item = getLibro(id);
-            item.FlagActivo = false;
+            item.FlagActivo = !item.FlagActivo;
+            dbLibContext.SubmitChanges();
+        }
+
+
+        public TM_Espacio_Trabajo getEspacioTrabajo(int id)
+        {
+            return dbLibContext.TM_Espacio_Trabajos.Where(i => i.ID_Espacio == id).FirstOrDefault();
+        }
+
+        public void eliminarEspacioTrabajo(int id)
+        {
+            var item = getEspacioTrabajo(id);
+            item.FlagActivo = !item.FlagActivo;
+            dbLibContext.SubmitChanges();
+        }
+
+        public void actualizarEspacioTrabajo(TM_Espacio_Trabajo espacio)
+        {
+            var item = getEspacioTrabajo(espacio.ID_Espacio);
+            item.Nombre_Espacio = espacio.Nombre_Espacio;
+
+            dbLibContext.SubmitChanges();
+        }
+
+        public void insertEspacioTrabajo(TM_Espacio_Trabajo item)
+        {
+            item.FlagActivo = true;
+            dbLibContext.TM_Espacio_Trabajos.InsertOnSubmit(item);
             dbLibContext.SubmitChanges();
         }
     }
