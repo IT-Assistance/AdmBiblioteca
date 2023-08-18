@@ -1,4 +1,5 @@
-﻿using CapaModelo.Modelos;
+﻿using CapaDatos.Database;
+using CapaModelo.Modelos;
 using CapaNegocios.Acciones;
 using System;
 using System.Collections.Generic;
@@ -32,76 +33,57 @@ namespace AdmBiblioteca.Controllers
             return View(model);
         }
 
-        // GET: ReservaLibro/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: ReservaLibro/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ReservaLibro/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
+                TD_Reserva_Libro item = new TD_Reserva_Libro()
+                {
+                    ID_Libro = int.Parse(collection.Get("libro")),
+                    Matricula = int.Parse(collection.Get("estudiante")),
+                    Inicio_Reserva = DateTime.Parse(collection.Get("fechaInicio")),
+                    Final_Reserva = DateTime.Parse(collection.Get("fechaFin")),
+                };
+
+                var id = collection.Get("id");
+                if (id != "")
+                {
+                    item.ID_Reserva_Libro = int.Parse(id);
+                    servicio.actualizarReservaLibro(item);
+                }
+                else
+                {
+                    servicio.insertReservaLibro(item);
+
+                }
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
-            }
-        }
-
-        // GET: ReservaLibro/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ReservaLibro/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
         }
 
-        // GET: ReservaLibro/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ReservaLibro/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
+                servicio.eliminarReservaLibro(id);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
+
+
     }
 }

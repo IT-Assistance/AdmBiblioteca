@@ -97,7 +97,7 @@ namespace CapaNegocios.Acciones
             dbLibContext.SubmitChanges();
         }
 
-
+      
         public TM_Espacio_Trabajo getEspacioTrabajo(int id)
         {
             return dbLibContext.TM_Espacio_Trabajos.Where(i => i.ID_Espacio == id).FirstOrDefault();
@@ -122,6 +122,111 @@ namespace CapaNegocios.Acciones
         {
             item.FlagActivo = true;
             dbLibContext.TM_Espacio_Trabajos.InsertOnSubmit(item);
+            dbLibContext.SubmitChanges();
+        }
+
+
+
+        public List<TD_Reserva_Espacio_Trabajo> listResrvasEspaciosTrabajo()
+        {
+            return dbLibContext.TD_Reserva_Espacio_Trabajos.ToList();
+        }
+        public TD_Reserva_Espacio_Trabajo getReservaEspacioTrabajo(int id)
+        {
+            return dbLibContext.TD_Reserva_Espacio_Trabajos.Where(i => i.ID_Reserva_Espacio == id).FirstOrDefault();
+        }
+
+        public void eliminarReservaEspacioTrabajo(int id)
+        {
+            var item = getReservaEspacioTrabajo(id);
+            item.FlagActivo = !item.FlagActivo;
+            dbLibContext.SubmitChanges();
+        }
+
+        public void actualizarReservaEspacioTrabajo(TD_Reserva_Espacio_Trabajo espacio)
+        {
+            var item = getReservaEspacioTrabajo(espacio.ID_Reserva_Espacio);
+            item.ID_Espacio = espacio.ID_Espacio;
+            item.Inicio_Reserva = espacio.Inicio_Reserva;
+            item.Final_Reserva = espacio.Final_Reserva;
+            item.Matricula = espacio.Matricula;
+
+            dbLibContext.SubmitChanges();
+        }
+
+        public void insertReservaEspacioTrabajo(TD_Reserva_Espacio_Trabajo item)
+        {
+            item.FlagActivo = true;
+            dbLibContext.TD_Reserva_Espacio_Trabajos.InsertOnSubmit(item);
+            dbLibContext.SubmitChanges();
+        }
+
+
+
+        public List<TD_Reserva_salones_reunione> listReservasSalon()
+        {
+            return dbLibContext.TD_Reserva_salones_reuniones.ToList();
+        }
+        public TD_Reserva_salones_reunione getReservaSalon(int id)
+        {
+            return dbLibContext.TD_Reserva_salones_reuniones.Where(i => i.ID_Reserva_Salon == id).FirstOrDefault();
+        }
+
+        public void eliminarReservaSalon(int id)
+        {
+            var item = getReservaSalon(id);
+            item.FlagActivo = !item.FlagActivo;
+            dbLibContext.SubmitChanges();
+        }
+
+        public void actualizarReservaSalonReunion(TD_Reserva_salones_reunione espacio)
+        {
+            var item = getReservaSalon(espacio.ID_Reserva_Salon);
+            item.ID_Reserva_Salon = espacio.ID_Reserva_Salon;
+            item.Inicio_Reserva = espacio.Inicio_Reserva;
+            item.Final_Reserva = espacio.Final_Reserva;
+            item.Matricula = espacio.Matricula;
+
+            dbLibContext.SubmitChanges();
+        }
+
+        public void insertReservaSalonReunion(TD_Reserva_salones_reunione item)
+        {
+            item.FlagActivo = true;
+            dbLibContext.TD_Reserva_salones_reuniones.InsertOnSubmit(item);
+            dbLibContext.SubmitChanges();
+        }
+
+
+
+
+        public TD_Reserva_Libro getReservaLibro(int id)
+        {
+            return dbLibContext.TD_Reserva_Libros.Where(i => i.ID_Reserva_Libro == id).FirstOrDefault();
+        }
+
+        public void eliminarReservaLibro(int id)
+        {
+            var item = getReservaLibro(id);
+            item.FlagActivo = !item.FlagActivo;
+            dbLibContext.SubmitChanges();
+        }
+
+        public void actualizarReservaLibro(TD_Reserva_Libro espacio)
+        {
+            var item = getReservaLibro(espacio.ID_Reserva_Libro);
+            item.ID_Reserva_Libro = espacio.ID_Reserva_Libro;
+            item.Inicio_Reserva = espacio.Inicio_Reserva;
+            item.Final_Reserva = espacio.Final_Reserva;
+            item.Matricula = espacio.Matricula;
+
+            dbLibContext.SubmitChanges();
+        }
+
+        public void insertReservaLibro(TD_Reserva_Libro item)
+        {
+            item.FlagActivo = true;
+            dbLibContext.TD_Reserva_Libros.InsertOnSubmit(item);
             dbLibContext.SubmitChanges();
         }
     }

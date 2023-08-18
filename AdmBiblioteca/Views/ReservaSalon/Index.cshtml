@@ -1,15 +1,20 @@
-﻿@model CapaModelo.Modelos.mReservaLibros
+﻿@model CapaModelo.Modelos.mReservaSalon
 @{
-    ViewBag.Title = "Reserva Libros";
+    ViewBag.Title = "Reserva salon";
 }
 
-<h2>Reserva de Libros</h2>
+<h2>Reserva de Salon de Reuniones</h2>
 
 <div class="row">
     <div class="col-md-4">
 
-        <form method="post" action="/ReservaLibro/create" id="formulario">
+        <form method="post" action="/reservaSalon/create" id="formulario">
             <input type="number" hidden id="id" name="id">
+
+            <div class="form-group">
+                <label for="nombre">Salon</label>
+                @Html.DropDownList("salon", new SelectList(Model.Salones, "ID_Salon", "Nombre_Salon"), new { @class = "form-control", @required = true })
+            </div>
 
             <div class="form-group">
                 <label for="nombre">Estudiante</label>
@@ -17,18 +22,13 @@
             </div>
 
             <div class="form-group">
-                <label for="nombre">Libro</label>
-                @Html.DropDownList("libro", new SelectList(Model.Libros, "ID_Libro", "Nombre_Libro"), new { @class = "form-control", @required = true })
-            </div>
-
-            <div class="form-group">
                 <label for="autor">Fecha Inicio</label>
-                <input required type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+                <input required type="date" class="form-control" id="autor" name="fechaInicio">
             </div>
 
             <div class="form-group">
                 <label for="autor">Fecha Fin</label>
-                <input required type="date" class="form-control" id="fechaFin" name="fechaFin">
+                <input required type="date" class="form-control" id="autor" name="fechaFin">
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -39,20 +39,19 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre Libro</th>
+                    <th>Salon</th>
                     <th>Estudiante</th>
-                    <th>Inicio</th>
                     <th>Fin</th>
                     <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.ReservasLibros)
+                @foreach (var item in Model.Reservas_Salones)
                 {
                     <tr>
-                        <td>@item.ID_Reserva_Libro</td>
-                        <td>@item.TM_Libro.Nombre_Libro</td>
+                        <td>@item.ID_Reserva_Salon</td>
+                        <td>@item.TM_Salones_Reunione.Nombre_Salon</td>
                         <td>@item.TM_Estudiante.Nombre</td>
                         <td>@item.Inicio_Reserva</td>
                         <td>@item.Final_Reserva</td>
@@ -65,13 +64,10 @@
                             <td style="color: darkred">Inactivo</td>
                         }
                         <td>
-                            <button 
-                                type="button" 
-                                class="btn btn-info btn-sm"
-                                onclick="editar(@item.ID_Reserva_Libro,@item.ID_Libro,@item.Matricula,'@item.Inicio_Reserva','@item.Final_Reserva')">
+                            <button type="button" class="btn btn-info btn-sm" onclick="editar(@item.ID_Reserva_Salon)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Reserva_Libro, @item.FlagActivo)">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(@item.ID_Libro, @item.FlagActivo)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </td>
@@ -88,7 +84,7 @@
 
     (function () {
         setTimeout(() => {
-            const userId = "@Model.EstudianteId";
+        const userId = @Model.EstudianteId;
         if (userId) {
             $("#estudiante").val(userId);
             $("#estudiante").prop('disabled','true');
@@ -98,13 +94,12 @@
     })();
 
 
-    function editar(id, libro, estudiante, fechaInicio, fechaFin) {
-        console.log(new Date(fechaInicio).toISOString())
+    function editar(id, nombre, autor, genero, paginas) {
         $("#id").val(id);
-        $("#libro").val(libro);
-        $("#estudiante").val(estudiante);
-        $("#fechaInicio").val(new Date(fechaInicio).toISOString().split('T')[0]);
-        $("#fechaFin").val(new Date(fechaFin).toISOString().split('T')[0]);
+        $("#nombre").val(nombre);
+        $("#autor").val(autor);
+        $("#genero").val(genero);
+        $("#paginas").val(paginas);
     }
 
     function eliminar(id, activo) {
@@ -115,7 +110,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/reservaLibro/Delete/" + id,
+            url: "/reservaSalon/Delete/" + id,
             success: () => location.reload(),
         });
     }

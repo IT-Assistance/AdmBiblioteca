@@ -45,6 +45,7 @@
     <Compile Include="Modelos\mLibros.cs" />
     <Compile Include="Modelos\mLogin.cs" />
     <Compile Include="Modelos\mReservaLibros.cs" />
+    <Compile Include="Modelos\mReservaSalon.cs" />
     <Compile Include="Modelos\mSalonesReuniones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

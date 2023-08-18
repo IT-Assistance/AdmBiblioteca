@@ -125,6 +125,7 @@
     <Compile Include="Controllers\LibrosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReservaLibroController.cs" />
+    <Compile Include="Controllers\ReservaSalonController.cs" />
     <Compile Include="Controllers\SalonesReunionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -173,6 +174,7 @@
     <Content Include="Views\ReservaLibro\Index.cshtml" />
     <Content Include="Views\SalonesReuniones\Index.cshtml" />
     <Content Include="Views\EspacioTrabajo\Index.cshtml" />
+    <Content Include="Views\ReservaSalon\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
